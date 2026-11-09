@@ -1,4 +1,4 @@
-const CACHE = 'marea-v3';
+const CACHE = 'marea-v4';
 const ARCHIVOS = ['./', './index.html', './style.css', './app.js', './manifest.json', './icon.svg'];
 
 self.addEventListener('install', (e) => {
