@@ -13,7 +13,7 @@
 <div id="app">
 
   <header>
-    <h1>Marea</h1>
+    <h1>Marea <span class="subtitulo">tensión y cabeza</span></h1>
     <nav id="tabs">
       <button class="tab-btn active" data-tab="hoy">Hoy</button>
       <button class="tab-btn" data-tab="resumen">Resumen</button>
@@ -27,50 +27,9 @@
     <section id="tab-hoy" class="tab-panel active">
       <div class="fecha-actual" id="fechaActual"></div>
 
-      <div id="alertaBox"></div>
-
       <div class="card">
-        <h2>Línea base de hoy</h2>
-
-        <div class="slider-row">
-          <div class="slider-label"><span>Dolor general</span><b id="valDolor">-</b></div>
-          <input type="range" min="0" max="10" step="0.5" id="sliderDolor" class="slider dolor">
-        </div>
-        <div class="slider-row">
-          <div class="slider-label"><span>Fatiga</span><b id="valFatiga">-</b></div>
-          <input type="range" min="0" max="10" step="0.5" id="sliderFatiga" class="slider fatiga">
-        </div>
-
-        <div class="sueno-row">
-          <label>Horas de sueño
-            <input type="number" id="suenoHoras" min="0" max="14" step="0.5" placeholder="7">
-          </label>
-          <label>Calidad
-            <select id="suenoCalidad">
-              <option value="">—</option>
-              <option value="mala">Mala</option>
-              <option value="regular">Regular</option>
-              <option value="buena">Buena</option>
-            </select>
-          </label>
-        </div>
-
-        <div class="nota-row">
-          <div class="ayuda" style="margin-bottom:6px;">Estado del día (una palabra o frase)</div>
-          <textarea id="notaHoy" placeholder="Ej: día duro, aguantando, bastante bien…"></textarea>
-          <button id="btnDictarNota" class="btn-mic" title="Dictar nota">🎙️</button>
-        </div>
-
-        <button id="btnGuardarHoy" class="btn-primario">Guardar día</button>
-      </div>
-
-      <div class="card">
-        <h2>Eventos agudos de hoy</h2>
-        <div id="listaEventosHoy" class="lista-eventos"></div>
-        <div class="eventos-add">
-          <button class="btn-evento migrana" data-tipo="migrana">+ migraña</button>
-          <button class="btn-evento fibro" data-tipo="fibro">+ brote de fibro</button>
-        </div>
+        <h2>Registro de hoy</h2>
+        <div id="formHoy"></div>
       </div>
     </section>
 
@@ -91,8 +50,15 @@
         <div id="diaDetalle"></div>
       </div>
       <div class="card">
-        <h2>Informe</h2>
-        <p class="ayuda">Genera un informe imprimible con tu historial, listo para guardar como PDF o llevar a consulta.</p>
+        <h2>Informe para el médico</h2>
+        <p class="ayuda">Genera un PDF con el resumen y el registro completo día a día: las dos tomas de tensión, dolor de cabeza, estado y notas.</p>
+        <label class="campo">Nombre en el informe
+          <input type="text" id="nombreInforme" placeholder="Nombre y apellidos">
+        </label>
+        <div class="rango-fechas">
+          <label class="campo">Desde <input type="date" id="informeDesde"></label>
+          <label class="campo">Hasta <input type="date" id="informeHasta"></label>
+        </div>
         <button id="btnExportarPDF" class="btn-primario">Exportar informe (PDF)</button>
       </div>
       <div class="card">

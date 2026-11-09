@@ -131,6 +131,50 @@ h1{ font-size: 24px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 1
   background: var(--dolor); color:#17140f; border:none; border-radius:8px; padding: 8px 12px; font-size:12.5px; font-weight:700; cursor:pointer;
 }
 
+/* ===== Remodelación: tensión + diario de cabeza ===== */
+.subtitulo{ font-size: 12px; font-weight: 500; color: var(--text-faint); margin-left: 8px; letter-spacing: 0; }
+
+.bloque{ margin-bottom: 20px; }
+.bloque-titulo{ font-size: 13px; font-weight: 600; color: var(--text-dim); margin-bottom: 8px; }
+
+.toma{ background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin-bottom: 10px; }
+.toma-cab{ display:flex; justify-content:space-between; align-items:center; margin-bottom: 10px; font-size: 13px; font-weight: 600; color: var(--text); }
+.toma-cab input[type=time]{
+  background: var(--panel); border: 1px solid var(--line); border-radius: 8px; color: var(--text);
+  padding: 6px 8px; font-size: 14px;
+}
+.toma-valores{ display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.toma-valores label{ font-size: 11px; color: var(--text-faint); display:flex; flex-direction:column; gap: 4px; }
+.toma-valores input{
+  width: 100%; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; color: var(--text);
+  padding: 10px 6px; font-size: 16px; text-align: center; font-family: 'SF Mono', monospace;
+}
+.toma-valores input::placeholder{ color: var(--text-faint); }
+
+.niveles{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.nivel-btn{
+  background: transparent; border: 1px solid var(--line); color: var(--text-dim); border-radius: 10px;
+  padding: 11px 4px; font-size: 12.5px; font-weight: 600; cursor: pointer;
+}
+.nivel-btn.on{ background: var(--fatiga); border-color: var(--fatiga); color: #17140f; }
+
+.chips{ display:flex; flex-wrap:wrap; gap: 6px; }
+.chip{
+  font-size: 12px; padding: 7px 11px; border-radius: 15px; border: 1px solid var(--line);
+  color: var(--text-dim); cursor: pointer; user-select: none;
+}
+.chip.on{ background: var(--dolor); border-color: var(--dolor); color: #17140f; }
+.chip-otro{ border-style: dashed; color: var(--text-faint); }
+
+.campo{ display:flex; flex-direction:column; gap: 4px; font-size: 11.5px; color: var(--text-faint); margin-bottom: 12px; }
+.campo input{
+  background: var(--panel-2); border: 1px solid var(--line); border-radius: 8px; color: var(--text);
+  padding: 10px; font-size: 14px; width: 100%;
+}
+.rango-fechas{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.frase-card.aviso{ border-left: 3px solid var(--fatiga); }
+
 /* ===== Modal propio ===== */
 .modal-overlay{
   position: fixed; inset: 0; background: rgba(0,0,0,0.6);
@@ -153,17 +197,27 @@ h1{ font-size: 24px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 1
 /* ===== Informe de impresión (oculto en pantalla) ===== */
 #informePDF{ display:none; }
 
+@page{ size: A4 landscape; margin: 12mm; }
+
 @media print{
-  body *{ visibility: hidden; }
-  #informePDF, #informePDF *{ visibility: visible; }
+  #app, #modalOverlay{ display:none !important; }
+  body{ background:#fff; padding:0; }
   #informePDF{
-    display:block; position:absolute; top:0; left:0; width:100%;
-    padding: 20px; color:#111; background:#fff;
+    display:block; color:#111; background:#fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
   #informePDF h1{ font-size: 20px; margin-bottom: 4px; }
-  #informePDF .informe-sub{ font-size: 11px; color:#555; margin-bottom: 18px; }
-  #informePDF h2{ font-size: 14px; margin: 18px 0 8px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
-  #informePDF table{ width:100%; border-collapse: collapse; font-size: 10.5px; }
-  #informePDF th, #informePDF td{ border: 1px solid #ccc; padding: 4px 6px; text-align: left; }
+  #informePDF .informe-sub{ font-size: 11px; color:#555; margin-bottom: 14px; }
+  #informePDF h2{ font-size: 14px; margin: 16px 0 8px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+  #informePDF .resumen-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 8px; }
+  #informePDF .caja{ border: 1px solid #ccc; border-radius: 4px; padding: 6px 8px; font-size: 10px; color:#555; }
+  #informePDF .caja b{ display:block; font-size: 14px; color:#111; margin-top: 2px; }
+  #informePDF table{ width:100%; border-collapse: collapse; font-size: 10px; }
+  #informePDF thead{ display: table-header-group; }
+  #informePDF tr{ page-break-inside: avoid; }
+  #informePDF th, #informePDF td{ border: 1px solid #ccc; padding: 4px 6px; text-align: left; vertical-align: top; }
   #informePDF th{ background: #eee; }
+  #informePDF td.num{ white-space: nowrap; }
+  #informePDF .pie{ font-size: 9px; color:#777; margin: -8px 0 6px; }
 }
